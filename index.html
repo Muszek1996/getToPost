@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML POST Request</title>
+</head>
+<body>
+
+  <form id="myForm">
+    <label for="message">Message:</label>
+    <input type="text" id="message" name="message" required>
+    <button type="button" onclick="sendMessage()">Send Message</button>
+  </form>
+
+  <script>
+    function sendMessage() {
+      const message = document.getElementById('message').value;
+
+      // Replace 'YOUR_SERVER_ENDPOINT' with the actual endpoint of your server
+      const serverEndpoint = 'https://example.com/api/send-message';
+
+      // Send POST request using fetch
+      fetch(serverEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+        }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log('Message sent successfully!');
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+      });
+    }
+  </script>
+
+</body>
+</html>
